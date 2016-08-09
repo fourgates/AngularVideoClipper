@@ -4,7 +4,7 @@ class AuthCtrl {
 		this.title = $state.current.title;
 		this.authType = $state.current.name.replace('app.', '');
 		this._User = User;
-		
+		this._$state = $state;
 		console.log('auth controller');
 	}
 	
@@ -13,8 +13,7 @@ class AuthCtrl {
 		console.log(this.formData);
 		this._User.attemptAuth(this.authType, this.formData).then(
 				(result)=>{
-					this.isSubmitting = false;
-					console.log('result', result);
+					this._$state.go('app.home');
 				},
 				(err) =>{
 					this.isSubmitting = false;

@@ -6,14 +6,24 @@ function AuthConfig($stateProvider, $httpProvider){
 			url: '/login',
 			controller: 'AuthCtrl as $ctrl',
 			templateUrl: 'auth/auth.html',
-			title: 'Sign In'
+			title: 'Sign In',
+			resolve: {
+				auth: function(User){
+					return User.ensureAuthIs(false);
+				}
+			}
 		})
 		
 		.state('app.register',{
 			url: '/register',
 			controller: 'AuthCtrl as $ctrl',
 			templateUrl: 'auth/auth.html',
-			title: 'Sign Up'
+			title: 'Sign Up',
+			resolve: {
+				auth: function(User){
+					return User.ensureAuthIs(false);
+				}
+			}
 		});
 };
 

@@ -69,4 +69,20 @@ export default class User{
 		}
 		return deferred.promise;
 	}	
+
+	ensureAuthIs(bool){
+		let deferred = this._$q.defer();
+
+		this.verifyAuth().then((authValid)=>{
+			if(authValid !== bool){
+				this._$state.go('app.home');
+				deferred.resolve(false);
+			}
+			else{
+				deferred.resolve(true);
+			}
+		})
+
+		return deferred.promise;
+	}
 }
