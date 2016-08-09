@@ -31,7 +31,9 @@ var interceptErrors = function(error) {
 gulp.task('browserify', ['views'], function() {
   return browserify('./src/js/app.js')
       .transform(babelify, {presets: ["es2015"]})
-      .transform(ngAnnotate)
+      // allows us to still use angular dependecy injection
+      // by including 'ngAnnotate' at the top of a controller
+      .transform(ngAnnotate)  
       .bundle()
       .on('error', interceptErrors)
       //Pass desired output filename to vinyl-source-stream
@@ -58,6 +60,7 @@ gulp.task('views', function() {
 
 // This task is used for building production ready
 // minified JS/CSS files into the dist/ folder
+// builds one html and one js file
 gulp.task('build', ['html', 'browserify'], function() {
   var html = gulp.src("build/index.html")
                  .pipe(gulp.dest('./dist/'));
