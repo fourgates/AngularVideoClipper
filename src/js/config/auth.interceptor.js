@@ -10,7 +10,7 @@ function authInterceptor(JWT, AppConstants, $window, $q){
 			return config;
 		},
 
-		// handle 401
+		// handle 401 -- token was invalid
 		responseError: function(rejection){
 			if(rejection.status === 401){
 				//clear JWT token

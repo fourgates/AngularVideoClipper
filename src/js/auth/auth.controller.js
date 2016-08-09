@@ -25,4 +25,4 @@ class AuthCtrl {
 	}
 }
 
-export default AuthCtrl
+export default AuthCtrl;
