@@ -6,11 +6,14 @@ export default class Article{
 		this._$http = $http
 	}
 
-	get(slug){
-		return this._$http({
-			url: this._AppConstants.api + '/articles/' + slug,
-			method: 'GET'
-		}).then((res)=>res.data.article)
+	get(slug) {
+	    let deferred = this._$q.defer();
+
+	    // Check for blank title
+	    if (!slug.replace(" ", "")) {
+	      deferred.reject("Article slug is empty");
+	      return deferred.promise;
+	    }
 	}
 	save(article){
 		let request = {};
