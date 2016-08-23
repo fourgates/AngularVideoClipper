@@ -4,7 +4,8 @@ class AppHeaderCtrl {
 
     this.appName = AppConstants.appName;
     this.currentUser = User.current;
-
+    this.secure = AppConstants.secure;
+    
     $scope.$watch('User.current', (newUser)=>{
     	this.currentUser = newUser;
     })

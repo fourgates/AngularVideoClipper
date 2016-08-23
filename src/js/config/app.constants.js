@@ -3,6 +3,7 @@ const AppConstants = {
 	api: 'https://conduit.productionready.io/api',
 	jwtKey: 'jwtToken',
 	appName: 'fourgates',
+	secure: false
 };
 
 export default AppConstants;
