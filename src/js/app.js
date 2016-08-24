@@ -13,7 +13,7 @@ import './components';
 import './home';
 import './services';
 import './auth';
-
+import './video';
 // Create and bootstrap application
 const requires = [
   'ui.router',
@@ -23,6 +23,7 @@ const requires = [
   'app.home',
   'app.services',
   'app.auth',
+  'app.video',
 ];
 
 // Mount on window for testing

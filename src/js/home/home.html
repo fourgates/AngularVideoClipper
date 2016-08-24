@@ -15,19 +15,7 @@
       <!-- Main view - contains tabs & article list -->
       <div class="col-md-9">
 		<h1>Main View</h1>
-		<label>
-			Start: <input ng-model="$ctrl.start" ng-change="$ctrl.change($ctrl.start)" type="text"></input>
-		</label>
-		<label>
-			End: <input ng-model="$ctrl.end" type="text"></input>
-		</label>
-		<button ng-click="$ctrl.addClip($ctrl.source, $ctrl.start, $ctrl.end)">Add Clip</button>
-		<div ng-repeat="video in $ctrl.clips">
-			<video width="320" height="240" controls ng-if="$ctrl.showVideo">
-			  <source ng-src="{{ $ctrl.getSrc(video) }}" type="video/mp4">
-			</video>
-		</div>	
-	
+		<video-editor></video-editor>
       </div>
 
       <!-- Sidebar where popular tags are listed -->

@@ -1,0 +1,14 @@
+<div class="video-player">
+	<label>
+		Start: <input ng-model="$ctrl.start" ng-change="$ctrl.change($ctrl.start)" type="text"></input>
+	</label>
+	<label>
+		End: <input ng-model="$ctrl.end" type="text"></input>
+	</label>
+	<button ng-click="$ctrl.addClip($ctrl.source, $ctrl.start, $ctrl.end)">Add Clip</button>
+	<div ng-repeat="video in $ctrl.clips">
+		<video width="320" height="240" controls ng-if="$ctrl.showVideo">
+		  <source ng-src="{{ $ctrl.getSrc(video) }}" type="video/mp4">
+		</video>
+	</div>
+</div>
