@@ -1,4 +1,4 @@
-function VideoEditor($sce){
+function VideoEditor($sce, $timeout){
 	'ngInject';
 	return{
 		scope: {
@@ -9,7 +9,7 @@ function VideoEditor($sce){
 		controller: function($scope){
 			'ngInject';
 			var ctrl = this;
-			ctrl.source = 'http://www.w3schools.com/tags/movie.mp4';
+			ctrl.source = 'http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4';
 			ctrl.start = 4;
 			ctrl.end = 10;
 			ctrl.showVideo = true;
@@ -44,8 +44,13 @@ function VideoEditor($sce){
 		    
 		    ctrl.playVideo = function(video){
 		    	$scope.start = video.start;
-		    	$scope.reload();
-		    	$scope.selectedVideo = video;
+		    	$scope.end = video.end;
+		    	$scope.video = null
+		    	$timeout(function(){
+		    		$scope.reload();
+			    	$scope.selectedVideo = video;
+		    	}, 2000)
+		    	
 		    }
 		    
 		    ctrl.change = function(d){
@@ -66,8 +71,10 @@ function VideoEditor($sce){
 					scope.player.height = scope.player.height;
 					//scope.player.paused = false;
 					scope.player.currentTime = scope.start;
+					console.log('start', scope.start);
 					console.log('el', el[0]);
 					console.log('video', scope.player);
+					console.log('video1', el.find("video"));
 				}
 				
 			}
