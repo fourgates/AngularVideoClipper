@@ -5,10 +5,32 @@
 	<label>
 		End: <input ng-model="$ctrl.end" type="text"></input>
 	</label>
-	<button ng-click="$ctrl.addClip($ctrl.source, $ctrl.start, $ctrl.end)">Add Clip</button>
-	<div ng-repeat="video in $ctrl.clips">
-		<video width="320" height="240" controls ng-if="$ctrl.showVideo">
-		  <source ng-src="{{ $ctrl.getSrc(video) }}" type="video/mp4">
-		</video>
+	<label>
+		Title: <input ng-model="$ctrl.title" type="text"></input>
+	</label>
+	<button ng-click="$ctrl.addClip($ctrl.source, $ctrl.start, $ctrl.end, $ctrl.title)">Add Clip</button>
+	
+	<video width="320" height="240" controls ng-if="selectedVideo">
+	  <source ng-src="{{ selectedVideo.src }}" type="video/mp4">
+	</video>
+	<button ng-click="selectedVideo = null">Hide</button>
+	<div>
+		<table>
+		  <thead>
+		    <tr>
+		      <th style="width:200px">Title</th>
+		      <th style="width:50px"">Start</th>
+		      <th style="width:50px">End</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr ng-repeat="video in clips">
+		      <td>{{ video.title }}</td>
+		      <td>{{ video.start }}</td>
+		      <td>{{ video.end }}</td>
+		      <td> <button ng-click="$ctrl.playVideo(video)">Play </button></td>
+		    </tr>
+		  </tbody>
+		</table>
 	</div>
 </div>

@@ -3,6 +3,7 @@ class HomeCtrl {
     'ngInject';
     
     this.appName = AppConstants.appName;
+    this.clips = [];
   }
 
 
