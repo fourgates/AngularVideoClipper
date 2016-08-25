@@ -1,3 +1,4 @@
+import jQuery from 'jquery';
 import angular from 'angular';
 
 // Import our app config files
@@ -27,6 +28,8 @@ const requires = [
 ];
 
 // Mount on window for testing
+//Mount on window for testing
+window.$ = window.jQuery = jQuery;
 window.app = angular.module('app', requires);
 
 angular.module('app').constant('AppConstants', constants);
