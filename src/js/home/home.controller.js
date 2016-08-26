@@ -4,6 +4,7 @@ class HomeCtrl {
     
     this.appName = AppConstants.appName;
     this.clips = [];
+    this.source = 'http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4';
   }
 
 

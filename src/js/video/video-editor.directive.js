@@ -2,29 +2,27 @@ function VideoEditor($sce, $timeout){
 	'ngInject';
 	return{
 		scope: {
-			clips: '='
+			clips: '=',
+			source: '='
 		},
 		templateUrl: 'video/video-editor.html',
 		controllerAs: '$ctrl',
 		controller: function($scope){
 			'ngInject';
 			var ctrl = this;
-			ctrl.source = 'http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4';
 			ctrl.showVideo = true;
 			
 			if(!$scope.clips || $scope.clips.length == 0){
 				var video = {
-			    		src: trustSrc(this.source + '#t='+this.start+',' + this.end),
-			    		title: 'Original',
-			    		start: 4,
-			    		end: 10,
+			    		src: trustSrc($scope.source),
+			    		title: 'Original'
 			    }
 			    $scope.clips.push(video);
+				$scope.selectedVideo = video;
 			}
-		    console.log('clips',$scope.clips);
 		    ctrl.addClip = function(src, start, end, title){
 		    	var video = {
-			    		src: trustSrc(this.source + '#t='+start+',' + end),
+			    		src: trustSrc($scope.source + '#t='+start+',' + end),
 			    		title: title,
 			    		start: start,
 			    		end: end,
@@ -67,7 +65,6 @@ function VideoEditor($sce, $timeout){
 			scope.$watch('clips', updatePlayer);
 			
 			function updatePlayer(){
-				console.log('scope', ctrl);
 				scope.selectedVideo = null;
 				var el = $(element);
 				scope.player = el.find("video")[0];
@@ -75,8 +72,12 @@ function VideoEditor($sce, $timeout){
 				//scope.player.empty();
 				if(scope.player){
 					scope.player.height = scope.player.height;
-					//scope.player.paused = false;
-					scope.player.currentTime = scope.start;
+					if(scope.start){
+						scope.player.currentTime = scope.start;
+					}
+					else{
+						scope.player.currentTime = 0;
+					}
 					scope.player.play();
 					scope.player.addEventListener("timeupdate",function(event) {console.log('!*!*!*!!*tes', event.timeStamp / 1000)});
 				}
@@ -89,6 +90,8 @@ function VideoEditor($sce, $timeout){
 					return video.currentTime;
 				}
 			}
+			
+			// link interface
 			scope.test = getTime;
 			scope.reload = updatePlayer;
 		}

@@ -1,5 +1,8 @@
 <div class="video-player">
 	<label>
+		Source: <input ng-model="source" type="text"></input>
+	</label>
+	<label>
 		Start: <input ng-model="$ctrl.start" ng-change="$ctrl.change($ctrl.start)" type="text"></input>
 	</label>
 	<label>
@@ -8,16 +11,11 @@
 	<label>
 		Title: <input ng-model="$ctrl.title" type="text"></input>
 	</label>
-	<button ng-click="$ctrl.addClip($ctrl.source, $ctrl.start, $ctrl.end, $ctrl.title)">Add Clip</button>
+	<button ng-click="$ctrl.addClip(source, $ctrl.start, $ctrl.end, $ctrl.title)">Add Clip</button>
 	
-	<video width="320" height="240" controls ng-if="selectedVideo" class="video-active">
+	<video width="320" height="240" controls class="video-active">
 	  <source ng-src="{{ selectedVideo.src }}" type="video/mp4">
 	</video>
-	<label> 
-	{{ selectedVideo.start }} / {{ selectedVideo.end }}
-	
-	</label>
-	<button ng-click="selectedVideo = null">Hide</button>
 	<div>
 		<table>
 		  <thead>
@@ -43,7 +41,7 @@
 		      </td>
 		      <td> <button ng-if="!video.editing" ng-click="$ctrl.playVideo(video)">Play </button></td>
 		      <td> <button ng-click="video.editing = !video.editing">{{ video.editing ? 'Cancel' : 'Edit' }} </button></td>
-		      <td> <button ng-if="!video.editing" ng-click="$ctrl.deleteVideo(video)">Delete </button></td>
+		      <td> <button ng-if="!video.editing && $index > 0" ng-click="$ctrl.deleteVideo(video)">Delete </button></td>
 		    </tr>
 		  </tbody>
 		</table>
