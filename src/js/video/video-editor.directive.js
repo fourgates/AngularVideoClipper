@@ -10,7 +10,6 @@ function VideoEditor($sce, $timeout){
 		controller: function($scope){
 			'ngInject';
 			var ctrl = this;
-			ctrl.showVideo = true;
 			
 			if(!$scope.clips || $scope.clips.length == 0){
 				var video = {
@@ -44,12 +43,6 @@ function VideoEditor($sce, $timeout){
 		    	$scope.reload();
 		    	$scope.selectedVideo = video;
 		    	
-		    }
-		    
-		    ctrl.change = function(d){
-		    	ctrl.showVideo = false;
-		    	console.log('d', d);
-		    	ctrl.showVideo = true;
 		    }
 		    
 		    ctrl.deleteVideo = function(clip){
