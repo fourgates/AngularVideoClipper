@@ -11,6 +11,7 @@ function VideoEditor($sce, $timeout){
 			'ngInject';
 			var ctrl = this;
 			
+			// if there are no clips add the first (original) clip
 			if(!$scope.clips || $scope.clips.length == 0){
 				var video = {
 			    		src: trustSrc($scope.source),
@@ -19,6 +20,8 @@ function VideoEditor($sce, $timeout){
 			    $scope.clips.push(video);
 				$scope.selectedVideo = video;
 			}
+			
+			// function called when a user manually add a clip
 		    ctrl.addClip = function(src, start, end, title){
 		    	var video = {
 			    		src: trustSrc($scope.source + '#t='+start+',' + end),
@@ -28,23 +31,19 @@ function VideoEditor($sce, $timeout){
 			    }
 		        $scope.clips.push(video);
 		    }
-		    ctrl.getTrustedSrc = function(src){
-		    	console.log('src', src);
-		    	return trustSrc(src);
-		    	
-		    }
+		    
+		    // function used to be able to stream via a url
 		    function trustSrc(src) {
 		        return $sce.trustAsResourceUrl(src);
 		    }
 		    
+		    // function called when a user wants to play a clip
 		    ctrl.playVideo = function(video){
-		    	$scope.start = video.start;
-		    	$scope.end = video.end;
-		    	$scope.reload();
+		    	$scope.reload(video.start);
 		    	$scope.selectedVideo = video;
-		    	
 		    }
 		    
+		    // function caled when a user wants to delete a clip
 		    ctrl.deleteVideo = function(clip){
 		    	if(clip){
 		    		var index = $scope.clips.indexOf(clip);
@@ -55,9 +54,13 @@ function VideoEditor($sce, $timeout){
 		    }
 		},
 		link: function(scope, element, attrs, ctrl, transclude){
+			// update player if a clips is added / deleted 
+			// or the source changes
 			scope.$watch('clips', updatePlayer);
+			scope.$watch('source', updatePlayer);
 			
-			function updatePlayer(){
+			var timestamp = null;
+			function updatePlayer(start){
 				scope.selectedVideo = null;
 				var el = $(element);
 				scope.player = el.find("video")[0];
@@ -65,27 +68,30 @@ function VideoEditor($sce, $timeout){
 				//scope.player.empty();
 				if(scope.player){
 					scope.player.height = scope.player.height;
-					if(scope.start){
-						scope.player.currentTime = scope.start;
+					if(start && start > 0){
+						scope.player.currentTime = start;
 					}
 					else{
 						scope.player.currentTime = 0;
 					}
 					scope.player.play();
-					scope.player.addEventListener("timeupdate",function(event) {console.log('!*!*!*!!*tes', event.timeStamp / 1000)});
+					
+					// TODO - maybe build out own video interface? 
+					// 			currentTime / duration, pause, play, start clip, end clip,stop
+					scope.player.addEventListener("timeupdate",function(event) {timestamp = event.timeStamp; console.log('!*!*!*!!*tes', event.timeStamp / 1000)});
 				}
 				
 			}
+			
+			// get player currrent time
 			function getTime(){
-				var el = $(element);
-				var video = el.find("video")[0];
-				if(video){
-					return video.currentTime;
+				if(timestamp){
+					return timestamp / 1000;
 				}
+				return 0;
 			}
 			
 			// link interface
-			scope.test = getTime;
 			scope.reload = updatePlayer;
 		}
 	}
