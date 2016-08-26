@@ -10,9 +10,13 @@
 	</label>
 	<button ng-click="$ctrl.addClip($ctrl.source, $ctrl.start, $ctrl.end, $ctrl.title)">Add Clip</button>
 	
-	<video width="320" height="240" controls ng-if="selectedVideo">
+	<video width="320" height="240" controls ng-if="selectedVideo" class="video-active">
 	  <source ng-src="{{ selectedVideo.src }}" type="video/mp4">
 	</video>
+	<label> 
+	{{ selectedVideo.start }} / {{ selectedVideo.end }}
+	
+	</label>
 	<button ng-click="selectedVideo = null">Hide</button>
 	<div>
 		<table>
@@ -25,10 +29,21 @@
 		  </thead>
 		  <tbody>
 		    <tr ng-repeat="video in clips">
-		      <td>{{ video.title }}</td>
-		      <td>{{ video.start }}</td>
-		      <td>{{ video.end }}</td>
-		      <td> <button ng-click="$ctrl.playVideo(video)">Play </button></td>
+		      <td>
+		      	<label ng-if="!video.editing" ng-bind="video.title"></label>
+		      	<input ng-if="video.editing" ng-model="video.title" type="text" ></input>
+		      </td>
+		      <td>
+		      	<label ng-if="!video.editing" ng-bind="video.start"></label>
+		      	<input ng-if="video.editing" ng-model="video.start" type="text"></input>
+		      </td>
+		      <td>
+		      	<label ng-if="!video.editing" ng-bind="video.end"></label>
+		      	<input ng-if="video.editing" ng-model="video.end" type="text"></input>
+		      </td>
+		      <td> <button ng-if="!video.editing" ng-click="$ctrl.playVideo(video)">Play </button></td>
+		      <td> <button ng-click="video.editing = !video.editing">{{ video.editing ? 'Cancel' : 'Edit' }} </button></td>
+		      <td> <button ng-if="!video.editing" ng-click="$ctrl.deleteVideo(video)">Delete </button></td>
 		    </tr>
 		  </tbody>
 		</table>
