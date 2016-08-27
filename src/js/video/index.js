@@ -15,10 +15,6 @@ module.directive('videoEditor', videoEditor);
 //		3. Break directive into components so the video player and playlist can be reused throughout the app
 //			a. maybe create an attribute directive?
 //		Bonus
-//		1. Ability to upload video
 //		2. Persist clips in cache
-//		3. Add tags to clips
-//		4. Filter by tags
-//		5. Hotkey to play the next clip
 //		6. Ability to queue clips
-//		7. Ability to sort clips (sort by index?)
+//		8. Repeat clip(s)
