@@ -10,6 +10,9 @@ function VideoEditor($sce, $timeout){
 		controller: function($scope){
 			'ngInject';
 			var ctrl = this;
+			$scope.start = null;
+			$scope.end = null;
+			$scope.title = null;
 			
 			ctrl.init = function(){
 				// if there are no clips add the first (original) clip
@@ -23,6 +26,20 @@ function VideoEditor($sce, $timeout){
 				}
 			}
 			
+			// function used to validate a clip
+			function validClip(video){
+				if(!video.start || ! video.end){
+					alert('Please enter a start and end point');
+					return false;
+				}
+				if(video.start && video.end){
+					if(video.start > video.end){
+						alert('Start point cannot be further than end point');
+						return false;
+					}
+				}
+				return true;
+			}
 			// function called when a user manually add a clip
 		    ctrl.addClip = function(src, start, end, title){
 		    	var video = {
@@ -31,7 +48,12 @@ function VideoEditor($sce, $timeout){
 			    		start: start,
 			    		end: end,
 			    }
-		        $scope.clips.push(video);
+		    	if(validClip(video)){
+		    		$scope.clips.push(video);
+		    		$scope.start = null;
+					$scope.end = null;
+					$scope.title = null;
+		    	}
 		    }
 		    
 		    // function used to be able to stream via a url
@@ -80,7 +102,6 @@ function VideoEditor($sce, $timeout){
 				console.log(scope.header);
 			}
 			function updatePlayer(start){
-				scope.selectedVideo = null;
 				var el = $(element);
 				scope.player = el.find("video")[0];
 				
