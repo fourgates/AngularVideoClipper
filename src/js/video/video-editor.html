@@ -1,65 +1,59 @@
 <div class="video-player">
-	<h1></h1>
-	<!-- VIDEO PLAYER -->
-	<video ng-if="selectedVideo" width="320" height="240" controls class="video-active">
-	  <source ng-src="{{ $ctrl.trustSrc(selectedVideo.src) }}" type="video/mp4">
-	</video>
-	<!-- CLIP EDITOR -->
-	<div id="manual-editor" style="border-style: solid;">
-		<label>
-			Source: <input ng-model="source" type="text"></input>
-		</label>
-		<label>
-			Start: <input ng-model="start" type="text"></input>
-		</label>
-		<label>
-			End: <input ng-model="end" type="text"></input>
-		</label>
-		<label>
-			Title: <input ng-model="title" type="text"></input>
-		</label>
-		<button ng-click="$ctrl.addClip(source, start, end, title)">Add Clip</button>
+	<div class="col-md-1">
+		<!-- CLIP EDITOR -->
 	</div>
-	<!-- MANAGE CLIPS -->
-	<div style="border: 1px solid black;">
-		<table>
-		  <thead>
-		    <tr>
-		      <th style="width:200px;border: 1px solid black;">Title</th>
-		      <th style="width:50px;border: 1px solid black;">Start</th>
-		      <th style="width:50px;border: 1px solid black;">End</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr ng-repeat="video in clips">
-		      <td style="border: 1px solid black;">
-		      	<label ng-if="!video.editing" ng-bind="video.title"></label>
-		      	<input ng-if="video.editing" ng-model="video.title" type="text" ></input>
-		      </td>
-		      <td style="border: 1px solid black;">
-		      	<label ng-if="!video.editing" ng-bind="video.start"></label>
-		      	<input ng-if="video.editing" ng-model="video.start" type="text"></input>
-		      </td>
-		      <td style="border: 1px solid black;">
-		      	<label ng-if="!video.editing" ng-bind="video.end"></label>
-		      	<input ng-if="video.editing" ng-model="video.end" type="text"></input>
-		      </td>
-		      <td style="border: 1px solid black;"> 	
-		      	<button ng-if="!video.editing" ng-click="$ctrl.playVideo(video)">
-		      		Play
-		      	</button>
-		      </td>
-		      <td style="border: 1px solid black;"> 
-		      	<button ng-click="video.editing = !video.editing">
-		      		{{ video.editing ? 'Save' : 'Edit' }} 
-		      	</button></td>
-		      <td style="border: 1px solid black;"> 
-		      	<button ng-if="!video.editing && $index > 0" ng-click="$ctrl.deleteVideo(video)">
-		      		Delete 
-		      	</button>
-		      </td>
-		    </tr>
-		  </tbody>
+	<!-- VIDEO PLAYER -->
+	<div class="col-md-11">
+		<div ng-if="selectedVideo">
+			<h1>Manually Add Clip</h1>
+			<table class="table table-responsive table-hover">
+			  	<thead>
+			        <tr><th></th></tr>
+			    </thead>
+			    <tbody>
+			        <tr class="clickable" data-toggle="collapse" id="row1" data-target=".row1">
+			            <td>
+			            	<label>Title: </label>
+			            	<input ng-model="title" type="text"></input>
+			            	<label>Start: </label>
+			            	<input ng-model="start" type="text"></input>
+			            	<label>End: </label>
+			            	<input ng-model="end" type="text"></input>
+			            	<button class="btn btn-success" ng-click="$ctrl.addClip(source, start, end, title)">Add Clip</button>
+			            </td>
+			        </tr>
+			    </tbody>
+			</table>
+		</div>
+		<video ng-if="selectedVideo" width="500px" height="240px" controls class="video-active">
+		  <source ng-src="{{ $ctrl.trustSrc(selectedVideo.src) }}" type="video/mp4">
+		</video>
+		<!-- MANAGE CLIPS -->
+		<table class="table table-responsive table-hover">
+		  	<thead>
+		        <tr><th>Title</th><th>Start</th><th>End</th><th></th></tr>
+		    </thead>
+		    <tbody>
+		        <tr class="clickable" ng-repeat="video in clips">
+		            <td>
+		            	<label ng-if="!video.editing" ng-bind="video.title"></label>
+			      		<input ng-if="video.editing" ng-model="video.title" type="text" ></input>
+		            </td>
+		          	<td>
+			          	<label ng-if="!video.editing" ng-bind="video.start"></label>
+				      	<input ng-if="video.editing" ng-model="video.start" type="text"></input>
+		          	</td>  
+		            <td>
+		            	<label ng-if="!video.editing" ng-bind="video.end"></label>
+			      		<input ng-if="video.editing" ng-model="video.end" type="text"></input>
+		            </td>
+		            <td>
+		            	<span class="glyphicon glyphicon-play-circle" ng-if="!video.editing" ng-click="$ctrl.playVideo(video)"></span>
+			      		<span class="glyphicon glyphicon-edit" ng-click="video.editing = !video.editing"></span>
+				      	<span class="glyphicon glyphicon-trash" ng-if="!video.editing && $index > 0" ng-click="$ctrl.deleteVideo(video)"></span>
+		            </td>
+		        </tr>
+		    </tbody>
 		</table>
 	</div>
 </div>

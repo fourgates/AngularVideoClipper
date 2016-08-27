@@ -8,31 +8,35 @@
     </div>
   </div>
 
-  <div class="container page">
+  <div>
     <div class="row">
-
-
       <!-- Main view - contains tabs & article list -->
-      <div class="col-md-9">
-		<h1>Main View</h1>
+      <div class="col-md-8">
 		<video-editor ng-if="$ctrl.selectedVideo" clips="$ctrl.selectedVideo.clips" source="$ctrl.selectedVideo.source"></video-editor>
       </div>
 
       <!-- Sidebar where popular tags are listed -->
-      <div class="col-md-3">
-		<h1>Sidebar</h1>
-		<button ng-click="$ctrl.log()">log</button>
-		<button ng-click="$ctrl.videos.push({clips: []})">Add Video</button>
-		<div style="border: 1px solid black;" ng-repeat="video in $ctrl.videos">
-			<button ng-click="$ctrl.selectedVideo = video">Play Video</button>
-			<label>
-				Source: <input ng-model="video.source" type="text"></input>
-			</label>
-			<label>
-				Title: <input ng-model="video.title" type="text"></input>
-			</label>
-			<button ng-click="$ctrl.deleteVideo(video)">Delete Video</button>
-		</div>
+      <div class="col-md-4">
+		<table class="table table-responsive table-hover">
+		  	<thead>
+		        <tr><th></th><th>Source</th><th>Title</th><th></th></tr>
+		    </thead>
+		    <tbody>
+		        <tr ng-repeat="video in $ctrl.videos" class="clickable">
+		            <td><i ng-click="$ctrl.selectedVideo = video" class="glyphicon glyphicon-play-circle"></i></td>
+		            <td>
+		            	<input ng-model="video.source" type="text"></input>
+		            </td>
+		          	<td>
+		          		<input ng-model="video.title" type="text">
+		          	</td>  
+		            <td>
+						<span class="glyphicon glyphicon-trash" ng-click="$ctrl.deleteVideo(video)"></span>
+		            </td>
+		        </tr>
+		    </tbody>
+		</table>
+		<button class="btn btn-success" ng-click="$ctrl.videos.push({clips: []})">Add Video</button>
       </div>
 
       <!-- End the row & container divs -->
