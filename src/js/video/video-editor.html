@@ -1,8 +1,10 @@
 <div class="video-player">
 	<h1></h1>
-	<video width="320" height="240" controls class="video-active">
+	<!-- VIDEO PLAYER -->
+	<video ng-if="selectedVideo" width="320" height="240" controls class="video-active">
 	  <source ng-src="{{ $ctrl.trustSrc(selectedVideo.src) }}" type="video/mp4">
 	</video>
+	<!-- CLIP EDITOR -->
 	<div id="manual-editor" style="border-style: solid;">
 		<label>
 			Source: <input ng-model="source" type="text"></input>
@@ -18,6 +20,7 @@
 		</label>
 		<button ng-click="$ctrl.addClip(source, $ctrl.start, $ctrl.end, $ctrl.title)">Add Clip</button>
 	</div>
+	<!-- MANAGE CLIPS -->
 	<div style="border: 1px solid black;">
 		<table>
 		  <thead>

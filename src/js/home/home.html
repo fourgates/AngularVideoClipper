@@ -15,12 +15,24 @@
       <!-- Main view - contains tabs & article list -->
       <div class="col-md-9">
 		<h1>Main View</h1>
-		<video-editor clips="$ctrl.clips" source="$ctrl.source"></video-editor>
+		<video-editor ng-if="$ctrl.selectedVideo" clips="$ctrl.selectedVideo.clips" source="$ctrl.selectedVideo.source"></video-editor>
       </div>
 
       <!-- Sidebar where popular tags are listed -->
       <div class="col-md-3">
 		<h1>Sidebar</h1>
+		<button ng-click="$ctrl.log()">log</button>
+		<button ng-click="$ctrl.videos.push({clips: []})">Add Video</button>
+		<div style="border: 1px solid black;" ng-repeat="video in $ctrl.videos">
+			<button ng-click="$ctrl.selectedVideo = video">Play Video</button>
+			<label>
+				Source: <input ng-model="video.source" type="text"></input>
+			</label>
+			<label>
+				Title: <input ng-model="video.title" type="text"></input>
+			</label>
+			<button ng-click="$ctrl.deleteVideo(video)">Delete Video</button>
+		</div>
       </div>
 
       <!-- End the row & container divs -->

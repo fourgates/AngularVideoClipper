@@ -11,14 +11,16 @@ function VideoEditor($sce, $timeout){
 			'ngInject';
 			var ctrl = this;
 			
-			// if there are no clips add the first (original) clip
-			if(!$scope.clips || $scope.clips.length == 0){
-				var video = {
-			    		src: $scope.source,
-			    		title: 'Original'
-			    }
-			    $scope.clips.push(video);
-				$scope.selectedVideo = video;
+			ctrl.init = function(){
+				// if there are no clips add the first (original) clip
+				if(!$scope.clips || $scope.clips.length == 0){
+					var video = {
+				    		src: $scope.source,
+				    		title: 'Original'
+				    }
+				    $scope.clips.push(video);
+					$scope.selectedVideo = video;
+				}
 			}
 			
 			// function called when a user manually add a clip
@@ -52,12 +54,18 @@ function VideoEditor($sce, $timeout){
 		    		}
 		    	}
 		    }
+		    
+		    ctrl.init();
 		},
 		link: function(scope, element, attrs, ctrl, transclude){
 			// update player if a clips is added / deleted 
 			// or the source changes
 			scope.$watch('clips', updatePlayer);
-			scope.$watch('source', updatePlayer);
+			scope.$watch('source', function(){
+				ctrl.init();
+				scope.selectedVideo = null;
+				console.log('INIT', scope.source);
+			});
 			scope.$watch('timestamp', updatePlayer2);
 			
 			var timestamp = null;
