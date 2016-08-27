@@ -14,7 +14,7 @@ function VideoEditor($sce, $timeout){
 			// if there are no clips add the first (original) clip
 			if(!$scope.clips || $scope.clips.length == 0){
 				var video = {
-			    		src: trustSrc($scope.source),
+			    		src: $scope.source,
 			    		title: 'Original'
 			    }
 			    $scope.clips.push(video);
@@ -24,7 +24,7 @@ function VideoEditor($sce, $timeout){
 			// function called when a user manually add a clip
 		    ctrl.addClip = function(src, start, end, title){
 		    	var video = {
-			    		src: trustSrc($scope.source + '#t='+start+',' + end),
+			    		src: $scope.source + '#t='+start+',' + end,
 			    		title: title,
 			    		start: start,
 			    		end: end,
@@ -33,7 +33,7 @@ function VideoEditor($sce, $timeout){
 		    }
 		    
 		    // function used to be able to stream via a url
-		    function trustSrc(src) {
+		    ctrl.trustSrc = function(src) {
 		        return $sce.trustAsResourceUrl(src);
 		    }
 		    
@@ -58,8 +58,16 @@ function VideoEditor($sce, $timeout){
 			// or the source changes
 			scope.$watch('clips', updatePlayer);
 			scope.$watch('source', updatePlayer);
+			scope.$watch('timestamp', updatePlayer2);
 			
 			var timestamp = null;
+			function updatePlayer2(start){
+				scope.selectedVideo = null;
+				var el = $(element);
+				scope.header = el.find("h1")[0];
+				
+				console.log(scope.header);
+			}
 			function updatePlayer(start){
 				scope.selectedVideo = null;
 				var el = $(element);
@@ -78,7 +86,13 @@ function VideoEditor($sce, $timeout){
 					
 					// TODO - maybe build out own video interface? 
 					// 			currentTime / duration, pause, play, start clip, end clip,stop
-					scope.player.addEventListener("timeupdate",function(event) {timestamp = event.timeStamp; console.log('!*!*!*!!*tes', event.timeStamp / 1000)});
+					scope.player.addEventListener("timeupdate",
+							function(event) {
+						scope.test2 = event; 
+						timestamp = event.timeStamp; 
+						//console.log('!*!*!*!!*tes', event.timeStamp / 1000)
+						}
+					);
 				}
 				
 			}
