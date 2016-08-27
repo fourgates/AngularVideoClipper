@@ -10,15 +10,15 @@
 			Source: <input ng-model="source" type="text"></input>
 		</label>
 		<label>
-			Start: <input ng-model="$ctrl.start" type="text"></input>
+			Start: <input ng-model="start" type="text"></input>
 		</label>
 		<label>
-			End: <input ng-model="$ctrl.end" type="text"></input>
+			End: <input ng-model="end" type="text"></input>
 		</label>
 		<label>
-			Title: <input ng-model="$ctrl.title" type="text"></input>
+			Title: <input ng-model="title" type="text"></input>
 		</label>
-		<button ng-click="$ctrl.addClip(source, $ctrl.start, $ctrl.end, $ctrl.title)">Add Clip</button>
+		<button ng-click="$ctrl.addClip(source, start, end, title)">Add Clip</button>
 	</div>
 	<!-- MANAGE CLIPS -->
 	<div style="border: 1px solid black;">

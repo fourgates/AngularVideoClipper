@@ -63,8 +63,11 @@ function VideoEditor($sce, $timeout){
 			scope.$watch('clips', updatePlayer);
 			scope.$watch('source', function(){
 				ctrl.init();
+				// cleanup -- move to init?
 				scope.selectedVideo = null;
-				console.log('INIT', scope.source);
+				scope.start = null;
+				scope.end = null;
+				scope.title = null;
 			});
 			scope.$watch('timestamp', updatePlayer2);
 			
