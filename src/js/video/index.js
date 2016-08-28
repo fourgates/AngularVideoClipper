@@ -6,15 +6,21 @@ import videoEditor from "./video-editor.directive";
 module.directive('videoEditor', videoEditor);
 
 // TODO:
-//		1. Add Clip Interface
-//			a. Mechanism to create a clip given a Title, Start Time, and End time
-//				i. Validation - ensure start is less than end
-//				ii. We can get clip length in the link function
-//			b. Table of Clips (Play Button, Select Checkbox, Title, Start, End, Delete Button)
-//		2. Input link for source video - move to sidebar
-//		3. Break directive into components so the video player and playlist can be reused throughout the app
-//			a. maybe create an attribute directive?
-//		Bonus
-//		2. Persist clips in cache
-//		6. Ability to queue clips
-//		8. Repeat clip(s)
+//	Priority 1:
+//		1. Validate clip on edit
+//		2. Break directive into components so the video player and playlist can be reused throughout the app
+//		3. Pass video object into directive 
+//		4. Add logic to pause player
+//	Priority 2:
+//		1. Persist clips in cache
+//		2. Ability to queue clips
+//		3. Repeat clip(s)
+//		4. Use thumbnails in source sidebar
+//		5. Create a toolbar -- https://codepen.io/markhillard/pen/Hjcwu?editors=1100#0
+//			a. Play Prev / Next
+//			b. Be able to repeat a track
+//		6. Only show pause/ play button during their respectful state
+// FIXME
+//		1. undefined:1 Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause().
+//			a. things to be happening out of order. may have something to do with the watches
+//		2. Should not be able to edit first clip
