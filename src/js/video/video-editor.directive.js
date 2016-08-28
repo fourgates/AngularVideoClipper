@@ -2,19 +2,16 @@ function VideoEditor($sce, $timeout){
 	'ngInject';
 	return{
 		scope: {
-			clips: '=',
-			source: '='
+			video: '='
 		},
 		templateUrl: 'video/video-editor.html',
 		controllerAs: '$ctrl',
 		controller: function($scope){
 			'ngInject';
 			var ctrl = this;
-			$scope.start = null;
-			$scope.end = null;
-			$scope.title = null;
-			
 			ctrl.init = function(){
+				$scope.clips = $scope.video.clips;
+				$scope.source = $scope.video.source;
 				// if there are no clips add the first (original) clip
 				if(!$scope.clips || $scope.clips.length == 0){
 					var video = {
@@ -91,16 +88,6 @@ function VideoEditor($sce, $timeout){
 				scope.end = null;
 				scope.title = null;
 			});
-			scope.$watch('timestamp', updatePlayer2);
-			
-			var timestamp = null;
-			function updatePlayer2(start){
-				scope.selectedVideo = null;
-				var el = $(element);
-				scope.header = el.find("h1")[0];
-				
-				console.log(scope.header);
-			}
 			function updatePlayer(start){
 				var el = $(element);
 				scope.player = el.find("video")[0];
@@ -120,21 +107,11 @@ function VideoEditor($sce, $timeout){
 					// 			currentTime / duration, pause, play, start clip, end clip,stop
 					scope.player.addEventListener("timeupdate",
 							function(event) {
-						scope.test2 = event; 
-						timestamp = event.timeStamp; 
 						//console.log('!*!*!*!!*tes', event.timeStamp / 1000)
 						}
 					);
 				}
 				
-			}
-			
-			// get player currrent time
-			function getTime(){
-				if(timestamp){
-					return timestamp / 1000;
-				}
-				return 0;
 			}
 			
 			// link interface

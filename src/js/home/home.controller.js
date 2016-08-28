@@ -9,23 +9,35 @@ class HomeCtrl {
     		clips: []			
     }
     
-    this.videos = [];
+    this.videos = [video];
     
-    this.log = function(){console.log(this.selectedVideo)};
+    this.selectedVideos = [];
     this.selectVideo = function(video){
-    	this.selectedVideo = video;
+    	this.selectedVideos.push(video);
     }
+    
     this.deleteVideo = function(video){
     	if(video){
-    		var index = this.videos.indexOf(video);
-    		if(index > -1){
-    			this.videos.splice(index, 1);
+    		deleteFromArray(video, this.videos);
+    		deleteFromArray(video, this.selectedVideos);
+    	}
+    }
+    
+    this.addVideo = function(video){
+    	if(video){
+    		var index = this.selectedVideos.indexOf(video);
+    		if(index == -1){
+    			this.selectedVideos.push(video);
     		}
     	}
     }
+    function deleteFromArray(video, array){
+    	var index = array.indexOf(video);
+		if(index > -1){
+			array.splice(index, 1);
+		}
+    }
   }
-
-
 }
 
 export default HomeCtrl;
