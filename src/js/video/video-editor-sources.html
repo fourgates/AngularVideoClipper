@@ -1,20 +1,22 @@
 <table class="table table-responsive table-hover">
   	<thead>
-        <tr><th></th><th>Source</th><th>Title</th><th></th></tr>
+        <tr>
+        	<th></th>
+        	<th>Sources</th>
+        	<th>
+        	<span class="glyphicon glyphicon-plus" ng-click="$ctrl.videos.push({clips: []})"></span>
+        	</tr>
     </thead>
     <tbody>
         <tr ng-repeat="video in $ctrl.videos" class="clickable">
-            <td><i ng-click="$ctrl.addVideo(video)" class="glyphicon glyphicon-play-circle"></i></td>
             <td>
-            	<input ng-model="video.source" type="text"></input>
+            	<i ng-click="$ctrl.addVideo(video)" class="glyphicon glyphicon-play-circle"></i>
+            	<span class="glyphicon glyphicon-trash" ng-click="$ctrl.deleteVideo(video)"></span>	
             </td>
-          	<td>
-          		<input ng-model="video.title" type="text">
-          	</td>  
             <td>
-				<span class="glyphicon glyphicon-trash" ng-click="$ctrl.deleteVideo(video)"></span>
+            	<input ng-model="video.source" placeholder="Source" type="text"></input>
+            	<input ng-model="video.title" placeholder="Title" type="text">
             </td>
         </tr>
     </tbody>
 </table>
-<button class="btn btn-success" ng-click="$ctrl.videos.push({clips: []})">Add Video</button>

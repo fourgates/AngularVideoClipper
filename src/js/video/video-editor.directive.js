@@ -2,7 +2,8 @@ function VideoEditor($sce, $timeout){
 	'ngInject';
 	return{
 		scope: {
-			video: '='
+			video: '=',
+			close: '='
 		},
 		templateUrl: 'video/video-editor.html',
 		controllerAs: '$ctrl',
@@ -15,8 +16,8 @@ function VideoEditor($sce, $timeout){
 				// if there are no clips add the first (original) clip
 				if(!$scope.clips || $scope.clips.length == 0){
 					var video = {
-				    		src: $scope.source,
-				    		title: 'Original'
+			    		src: $scope.source,
+			    		title: 'Original'
 				    }
 				    $scope.clips.push(video);
 					$scope.selectedVideo = video;

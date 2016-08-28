@@ -9,17 +9,16 @@
 
   <div>
     <div class="row">
-    <!-- SELECTED VIDEOS -->
-      <div class="col-md-8">
-      	<div ng-repeat="video in $ctrl.selectedVideos">
-      		<video-editor video="video"></video-editor>
+	  	<!-- SOURCES -->
+	    <div class="col-md-3">
+			<video-editor-sources videos="$ctrl.videos" selected-videos="$ctrl.selectedVideos"></video-editor-sources>
+	    </div>
+    	<!-- SELECTED VIDEOS -->
+    	<div class="col-md-9">
+	      	<div ng-repeat="video in $ctrl.selectedVideos">
+	      		<video-editor video="video" close="$ctrl.removeSelectedVideo"></video-editor>
+	      	</div>
       	</div>
-      </div>
-
-      <!-- SOURCES -->
-      <div class="col-md-4">
-		<video-editor-sources videos="$ctrl.videos" selected-videos="$ctrl.selectedVideos"></video-editor-sources>
-      </div>
     </div>
   </div>
 
