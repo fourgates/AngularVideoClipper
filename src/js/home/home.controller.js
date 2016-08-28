@@ -9,7 +9,7 @@ class HomeCtrl {
     		clips: []			
     }
     
-    this.videos = [video];
+    this.videos = [];
     
     this.log = function(){console.log(this.selectedVideo)};
     this.selectVideo = function(video){
