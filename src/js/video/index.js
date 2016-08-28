@@ -2,6 +2,11 @@ import angular from 'angular';
 
 var module = angular.module('app.video', []);
 
+//components
+import videoEditorSources from "./video-editor-sources.component";
+module.component('videoEditorSources', videoEditorSources);
+
+// directives
 import videoEditor from "./video-editor.directive";
 module.directive('videoEditor', videoEditor);
 

@@ -1,0 +1,20 @@
+<table class="table table-responsive table-hover">
+  	<thead>
+        <tr><th></th><th>Source</th><th>Title</th><th></th></tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="video in $ctrl.videos" class="clickable">
+            <td><i ng-click="$ctrl.addVideo(video)" class="glyphicon glyphicon-play-circle"></i></td>
+            <td>
+            	<input ng-model="video.source" type="text"></input>
+            </td>
+          	<td>
+          		<input ng-model="video.title" type="text">
+          	</td>  
+            <td>
+				<span class="glyphicon glyphicon-trash" ng-click="$ctrl.deleteVideo(video)"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-success" ng-click="$ctrl.videos.push({clips: []})">Add Video</button>
