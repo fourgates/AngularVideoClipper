@@ -4,7 +4,7 @@
         	<th></th>
         	<th>Sources</th>
         	<th>
-        	<span ng-if="formState.editing" class="glyphicon glyphicon-plus" ng-click="$ctrl.videos.push({clips: []})"></span>
+        	<span ng-if="$ctrl.formState.editing" class="glyphicon glyphicon-plus" ng-click="$ctrl.videos.push({clips: []})"></span>
         	</tr>
     </thead>
     <tbody>
@@ -14,8 +14,8 @@
             	<span class="glyphicon glyphicon-trash" ng-click="$ctrl.deleteVideo(video)"></span>	
             </td>
             <td>
-            	<input ng-model="video.source" ng-disabled="!formState.editing" placeholder="Source" type="text"></input>
-            	<input ng-model="video.title" ng-disabled="!formState.editing" placeholder="Title" type="text">
+            	<input ng-model="video.source" ng-disabled="!$ctrl.formState.editing" placeholder="Source" type="text"></input>
+            	<input ng-model="video.title" ng-disabled="!$ctrl.formState.editing" placeholder="Title" type="text">
             </td>
         </tr>
     </tbody>

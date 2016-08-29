@@ -1,6 +1,6 @@
 <table class="table table-hover" style="width: 100%;background-color: #eee;border-radius: 5px;">
   	<thead>
-        <tr><th><span class="glyphicon glyphicon-plus" ng-click="clips.push({clips: [], editing: true})"></span></th><th>Title</th><th>Start</th><th>End</th><th></th></tr>
+        <tr><th><span ng-if="formState.editing" class="glyphicon glyphicon-plus" ng-click="clips.push({clips: [], editing: true})"></span></th><th>Title</th><th>Start</th><th>End</th><th></th></tr>
     </thead>
     <tbody>
         <tr class="clickable" ng-repeat="video in clips">
@@ -9,20 +9,20 @@
         		<span class="glyphicon glyphicon-pause" ng-if="!video.editing" ng-click="$ctrl.playVideo(video)"></span>
         	</td>
             <td>
-            	<label ng-if="!video.editing" ng-bind="video.title"></label>
-	      		<input ng-if="video.editing" ng-model="video.title" type="text" ></input>
+	      		<input ng-model="video.title" ng-disabled="!formState.editing || !video.editing" type="text" ></input>
             </td>
           	<td>
-	          	<label ng-if="!video.editing" ng-bind="video.start"></label>
-		      	<input ng-if="video.editing" ng-model="video.start" type="text"></input>
+		      	<input ng-model="video.start" ng-disabled="!formState.editing || !video.editing" type="text"></input>
           	</td>  
             <td>
-            	<label ng-if="!video.editing" ng-bind="video.end"></label>
-	      		<input ng-if="video.editing" ng-model="video.end" type="text"></input>
+	      		<input ng-model="video.end" ng-disabled="!formState.editing || !video.editing" type="text"></input>
             </td>
             <td>
-	      		<span class="glyphicon glyphicon-edit" ng-click="video.editing = !video.editing"></span>
-		      	<span class="glyphicon glyphicon-trash" ng-if="!video.editing && $index > 0" ng-click="deleteVideo(video)"></span>
+	      		<span 
+	      			ng-class="{'glyphicon glyphicon-edit': !video.editing, 'glyphicon glyphicon-floppy-save': video.editing}" 
+	      			ng-click="video.editing = !video.editing">
+	      		</span>
+		      	<span class="glyphicon glyphicon-trash" ng-if="formState.editing && $index > 0" ng-click="deleteVideo(video)"></span>
             </td>
         </tr>
     </tbody>

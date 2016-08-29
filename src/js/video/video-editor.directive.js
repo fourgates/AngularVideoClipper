@@ -3,7 +3,8 @@ function VideoEditor($sce, $timeout){
 	return{
 		scope: {
 			video: '=',
-			close: '='
+			close: '=',
+			formState: '='
 		},
 		templateUrl: 'video/video-editor.html',
 		controllerAs: '$ctrl',
