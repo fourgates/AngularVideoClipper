@@ -6,9 +6,17 @@
       <p>A place to share your somthing else.</p>
     </div>
   </div>
-	<button class="btn btn-info" ng-click="$ctrl.formState.editing = !$ctrl.formState.editing"> Toggle Form State</button>
+	<button class="btn btn-info" ng-if="$ctrl.selectedVideos.length > 0" ng-click="$ctrl.formState.editing = !$ctrl.formState.editing"> Toggle Form State</button>
   <div>
-    <div class="row">
+  	<div class="row" ng-if="$ctrl.selectedVideos.length <= 0">
+  		<div class="col-md-4"></div>
+	  	<!-- SOURCES -->
+	    <div class="col-md-4">
+			<video-editor-sources videos="$ctrl.videos" selected-videos="$ctrl.selectedVideos" form-state="$ctrl.formState"></video-editor-sources>
+	    </div>
+    	<div class="col-md-4"></div>
+    </div>
+    <div class="row" ng-if="$ctrl.selectedVideos.length > 0">
 	  	<!-- SOURCES -->
 	    <div class="col-md-3">
 			<video-editor-sources videos="$ctrl.videos" selected-videos="$ctrl.selectedVideos" form-state="$ctrl.formState"></video-editor-sources>

@@ -11,11 +11,11 @@
         <tr ng-repeat="video in $ctrl.videos" class="clickable">
             <td>
             	<i ng-click="$ctrl.addVideo(video)" class="glyphicon glyphicon-play-circle"></i>
-            	<span class="glyphicon glyphicon-trash" ng-click="$ctrl.deleteVideo(video)"></span>	
             </td>
             <td>
             	<input ng-model="video.source" ng-disabled="!$ctrl.formState.editing" placeholder="Source" type="text"></input>
             	<input ng-model="video.title" ng-disabled="!$ctrl.formState.editing" placeholder="Title" type="text">
+            	<span class="glyphicon glyphicon-trash" ng-click="$ctrl.deleteVideo(video)"></span>	
             </td>
         </tr>
     </tbody>

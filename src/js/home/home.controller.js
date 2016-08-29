@@ -7,7 +7,7 @@ class HomeCtrl {
     		source: 'http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4',
     		clips: []			
     }
-    ctrl.videos = [video];    
+    ctrl.videos = [];    
     ctrl.selectedVideos = [];
     ctrl.removeSelectedVideo = function(video){
     	if(video){
