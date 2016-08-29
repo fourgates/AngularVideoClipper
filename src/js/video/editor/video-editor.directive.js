@@ -63,7 +63,7 @@ function VideoEditor($sce, $timeout){
 		    // function called when a user wants to play a clip
 		    ctrl.playVideo = function(clip, index){
 		    	if(validClip(clip, index)){
-		    		$scope.reload(clip.start);
+		    		$scope.reload(clip.start, clip.end);
 			    	$scope.selectedVideo = clip;
 		    	}
 		    }
@@ -78,17 +78,19 @@ function VideoEditor($sce, $timeout){
 		    	}
 		    }
 		    
+		    ctrl.pauseVideo = function(video){
+		    	$scope.pauseVideo(video);
+		    };
 		    ctrl.init();
 		},
 		link: function(scope, element, attrs, ctrl, transclude){
 			// update player if a clips is added / deleted 
 			// or the source changes
 			
-			function updatePlayer(start){
+			function updatePlayer(start, end){
 				var el = $(element);
 				scope.player = el.find("video")[0];
 				
-				//scope.player.empty();
 				if(scope.player){
 					scope.player.height = scope.player.height;
 					if(start && start > 0){
@@ -98,20 +100,20 @@ function VideoEditor($sce, $timeout){
 						scope.player.currentTime = 0;
 					}
 					scope.player.play();
-					
-					// TODO - maybe build out own video interface? 
-					// 			currentTime / duration, pause, play, start clip, end clip,stop
-					scope.player.addEventListener("timeupdate",
-							function(event) {
-						//console.log('!*!*!*!!*tes', event.timeStamp / 1000)
-						}
-					);
 				}
-				
 			}
 			
+			function pauseVideo(video){
+				var el = $(element);
+				scope.player = el.find("video")[0];
+				if(scope.player){
+					scope.player.height = scope.player.height;
+					scope.player.pause();
+				}
+			}
 			// link interface
 			scope.reload = updatePlayer;
+			scope.pauseVideo = pauseVideo;
 		}
 	}
 }

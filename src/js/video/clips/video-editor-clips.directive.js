@@ -16,6 +16,7 @@ function VideoEditorClips(){
 		link: function(scope, element, attrs, VideoEditor, transclude){
 			scope.playVideo = VideoEditor.playVideo;
 			scope.deleteVideo = VideoEditor.deleteVideo;
+			scope.pauseVideo = VideoEditor.pauseVideo;
 		}
 	}
 }

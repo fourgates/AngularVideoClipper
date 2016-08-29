@@ -6,7 +6,7 @@
         <tr class="clickable" ng-repeat="video in clips">
         	<td>
         		<span class="glyphicon glyphicon-play-circle" ng-if="!video.editing" ng-click="playVideo(video, $index)"></span>
-        		<span class="glyphicon glyphicon-pause" ng-if="!video.editing" ng-click="$ctrl.playVideo(video)"></span>
+        		<span class="glyphicon glyphicon-pause" ng-if="!video.editing" ng-click="pauseVideo(video)"></span>
         	</td>
             <td>
 	      		<input ng-model="video.title" ng-disabled="!formState.editing || !video.editing" type="text" ></input>
