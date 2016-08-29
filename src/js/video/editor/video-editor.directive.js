@@ -83,15 +83,7 @@ function VideoEditor($sce, $timeout){
 		link: function(scope, element, attrs, ctrl, transclude){
 			// update player if a clips is added / deleted 
 			// or the source changes
-			scope.$watch('clips', updatePlayer);
-			scope.$watch('source', function(){
-				ctrl.init();
-				// cleanup -- move to init?
-				scope.selectedVideo = null;
-				scope.start = null;
-				scope.end = null;
-				scope.title = null;
-			});
+			
 			function updatePlayer(start){
 				var el = $(element);
 				scope.player = el.find("video")[0];
