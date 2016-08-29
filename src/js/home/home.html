@@ -1,0 +1,25 @@
+ <div class="home-page">
+  <!-- Splash banner that only shows when not logged in -->
+  <div class="banner" show-authed="false">
+    <div class="container">
+      <h1 class="logo-font" ng-bind="::$ctrl.appName | lowercase"></h1>
+      <p>A place to share your somthing else.</p>
+    </div>
+  </div>
+	<button class="btn btn-info" ng-click="$ctrl.formState.editing = !$ctrl.formState.editing"> Toggle Form State</button>
+  <div>
+    <div class="row">
+	  	<!-- SOURCES -->
+	    <div class="col-md-3">
+			<video-editor-sources videos="$ctrl.videos" selected-videos="$ctrl.selectedVideos" form-state="$ctrl.formState"></video-editor-sources>
+	    </div>
+    	<!-- SELECTED VIDEOS -->
+    	<div class="col-md-9">
+	      	<div ng-repeat="video in $ctrl.selectedVideos">
+	      		<video-editor video="video" close="$ctrl.removeSelectedVideo" form-state="$ctrl.formState"></video-editor>
+	      	</div>
+      	</div>
+    </div>
+  </div>
+
+</div>

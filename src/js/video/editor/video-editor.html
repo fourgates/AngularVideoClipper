@@ -1,0 +1,12 @@
+<div class="video-player" style="position: relative;background-color: #fff;-webkit-background-clip: padding-box;background-clip: padding-box;border: 1px solid #999;border: 1px solid rgba(0,0,0,.2);border-radius: 6px;outline: 0;-webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);box-shadow: 0 3px 9px rgba(0,0,0,.5);">
+	<div class="video-header" style="padding: 15px;border-bottom: 1px solid #e5e5e5;">
+		<button type="button" class="close" ng-click="close(video)"><span aria-hidden="true">×</span></button>
+		<h4>{{ video.title }} - {{ selectedVideo.title }}</h4>
+	</div>
+	<!-- VIDEO -->
+	<video ng-if="selectedVideo" width="100%" height="240px" class="video-active">
+	  <source ng-src="{{ $ctrl.trustSrc(selectedVideo.src) }}" type="video/mp4">
+	</video>
+	<!-- MANAGE CLIPS -->
+	<video-editor-clips clips="clips" source="source" form-state="formState"></video-editor-clips>
+</div>
