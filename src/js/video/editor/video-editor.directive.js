@@ -6,7 +6,7 @@ function VideoEditor($sce, $timeout){
 			close: '=',
 			formState: '='
 		},
-		templateUrl: 'video/video-editor.html',
+		templateUrl: 'video/editor/video-editor.html',
 		controllerAs: '$ctrl',
 		controller: function($scope){
 			'ngInject';
@@ -26,8 +26,8 @@ function VideoEditor($sce, $timeout){
 			}
 			
 			// function used to validate a clip
-			function validClip(video){
-				if(!video.start || ! video.end){
+			function validClip(video, index){
+				if((!video.start || ! video.end) && index > 0){
 					alert('Please enter a start and end point');
 					return false;
 				}
@@ -61,9 +61,11 @@ function VideoEditor($sce, $timeout){
 		    }
 		    
 		    // function called when a user wants to play a clip
-		    ctrl.playVideo = function(video){
-		    	$scope.reload(video.start);
-		    	$scope.selectedVideo = video;
+		    ctrl.playVideo = function(clip, index){
+		    	if(validClip(clip, index)){
+		    		$scope.reload(clip.start);
+			    	$scope.selectedVideo = clip;
+		    	}
 		    }
 		    
 		    // function caled when a user wants to delete a clip

@@ -5,7 +5,7 @@
     <tbody>
         <tr class="clickable" ng-repeat="video in clips">
         	<td>
-        		<span class="glyphicon glyphicon-play-circle" ng-if="!video.editing" ng-click="playVideo(video)"></span>
+        		<span class="glyphicon glyphicon-play-circle" ng-if="!video.editing" ng-click="playVideo(video, $index)"></span>
         		<span class="glyphicon glyphicon-pause" ng-if="!video.editing" ng-click="$ctrl.playVideo(video)"></span>
         	</td>
             <td>
