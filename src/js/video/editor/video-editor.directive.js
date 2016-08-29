@@ -46,8 +46,12 @@ function VideoEditor($sce, $timeout){
 		    // function called when a user wants to play a clip
 		    ctrl.playVideo = function(clip, index){
 		    	if(validClip(clip, index)){
-		    		$scope.reload(clip.start, clip.end);
-			    	$scope.selectedVideo = clip;
+		    		$scope.selectedVideo = clip;
+		    		//clip.src = clip.src + '#t='+clip.start+',' + clip.end,
+		    		
+		    		$timeout(function(){
+		    			$scope.reload(clip.start, clip.end);
+		    		}, 500)
 		    	}
 		    }
 		    
@@ -84,7 +88,6 @@ function VideoEditor($sce, $timeout){
 					scope.player.addEventListener("timeupdate",autoPauseVideo);
 				}
 			}
-			
 			// function fires when the current video has reached its end
 			function autoPauseVideo(event) {
 				if(scope.selectedVideo.end){

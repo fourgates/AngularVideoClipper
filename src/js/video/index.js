@@ -13,6 +13,10 @@ module.directive('videoEditor', videoEditor);
 import videoEditorClips from "./clips/video-editor-clips.directive";
 module.directive('videoEditorClips', videoEditorClips);
 
+//serivce
+import videoService from "./video.service"
+module.service('VideoService', videoService);
+
 // TODO:
 //	Priority 1:
 //	Priority 2:
