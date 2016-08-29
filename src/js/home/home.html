@@ -11,7 +11,7 @@
   <div>
   	<div class="row" ng-if="$ctrl.readOnly">
   		<div class="col-md-12">
-	      	<div ng-repeat="video in $ctrl.selectedVideos">
+	      	<div ng-repeat="video in $ctrl.videos">
 	      		<video-editor video="video" close="$ctrl.removeSelectedVideo" form-state="$ctrl.formState"></video-editor>
 	      	</div>
       	</div>
