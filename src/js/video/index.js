@@ -3,14 +3,14 @@ import angular from 'angular';
 var module = angular.module('app.video', []);
 
 //components
-import videoEditorSources from "./video-editor-sources.component";
+import videoEditorSources from "./sources/video-editor-sources.component";
 module.component('videoEditorSources', videoEditorSources);
 
 // directives
 import videoEditor from "./video-editor.directive";
 module.directive('videoEditor', videoEditor);
 
-import videoEditorClips from "./video-editor-clips.directive";
+import videoEditorClips from "./clips/video-editor-clips.directive";
 module.directive('videoEditorClips', videoEditorClips);
 
 // TODO:

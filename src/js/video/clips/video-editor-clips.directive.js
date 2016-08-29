@@ -5,7 +5,7 @@ function VideoEditorClips(){
 			clips: '=',
 			source: '='
 		},
-		templateUrl: 'video/video-editor-clips.html',
+		templateUrl: 'video/clips/video-editor-clips.html',
 		require: '^^videoEditor',
 		controllerAs: '$ctrl',
 		controller: function($scope){

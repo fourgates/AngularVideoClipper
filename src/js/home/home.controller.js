@@ -17,6 +17,7 @@ class HomeCtrl {
     		}
     	}
     }
+    ctrl.formState = {editing: false};
   }
 }
 

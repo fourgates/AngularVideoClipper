@@ -27,10 +27,11 @@ class VideoEditorSourcesCtrl {
 
 let VideoEditorSources = {
   controller: VideoEditorSourcesCtrl,
-  templateUrl: 'video/video-editor-sources.html',
+  templateUrl: 'video/sources/video-editor-sources.html',
   bindings:{
 		videos: '=',
-		selectedVideos: '='
+		selectedVideos: '=',
+		formState: '='
   }
 };
 
