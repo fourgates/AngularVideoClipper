@@ -7,8 +7,16 @@
     </div>
   </div>
 	<button class="btn btn-info" ng-if="$ctrl.selectedVideos.length > 0" ng-click="$ctrl.formState.editing = !$ctrl.formState.editing"> Toggle Form State</button>
+	<button class="btn btn-info" ng-if="$ctrl.selectedVideos.length > 0" ng-click="$ctrl.toggleReadOnly($ctrl.readOnly)"> Toggle Read Only</button>
   <div>
-  	<div class="row" ng-if="$ctrl.selectedVideos.length <= 0">
+  	<div class="row" ng-if="$ctrl.readOnly">
+  		<div class="col-md-12">
+	      	<div ng-repeat="video in $ctrl.selectedVideos">
+	      		<video-editor video="video" close="$ctrl.removeSelectedVideo" form-state="$ctrl.formState"></video-editor>
+	      	</div>
+      	</div>
+    </div>
+  	<div class="row" ng-if="$ctrl.selectedVideos.length <= 0 && !$ctrl.readOnly">
   		<div class="col-md-4"></div>
 	  	<!-- SOURCES -->
 	    <div class="col-md-4">
@@ -16,7 +24,7 @@
 	    </div>
     	<div class="col-md-4"></div>
     </div>
-    <div class="row" ng-if="$ctrl.selectedVideos.length > 0">
+    <div class="row" ng-if="$ctrl.selectedVideos.length > 0 && !$ctrl.readOnly">
 	  	<!-- SOURCES -->
 	    <div class="col-md-3">
 			<video-editor-sources videos="$ctrl.videos" selected-videos="$ctrl.selectedVideos" form-state="$ctrl.formState"></video-editor-sources>
@@ -29,5 +37,4 @@
       	</div>
     </div>
   </div>
-
 </div>

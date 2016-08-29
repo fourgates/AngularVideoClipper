@@ -21,7 +21,7 @@
 	      		<span 
 	      			ng-class="{'glyphicon glyphicon-edit': !video.editing, 'glyphicon glyphicon-floppy-save': video.editing}" 
 	      			ng-click="video.editing = !video.editing"
-	      			ng-if="$index > 0">
+	      			ng-if="$index > 0 && formState.editing">
 	      		</span>
 		      	<span class="glyphicon glyphicon-trash" ng-if="formState.editing && $index > 0" ng-click="deleteVideo(video)"></span>
             </td>

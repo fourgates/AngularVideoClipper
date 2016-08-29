@@ -26,6 +26,16 @@ class HomeCtrl {
     }
     ctrl.formState = {editing: true};
   }
+  
+  toggleReadOnly(){
+	  this.readOnly = !this.readOnly; 
+	  if(this.readOnly){
+		  this.formState.editing = false;
+	  }
+	  else{
+		  this.formState.editing = true;
+	  }
+  }
 }
 
 export default HomeCtrl;
