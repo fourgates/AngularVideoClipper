@@ -7,4 +7,4 @@ Angular Application for clipping videos
 
 Make sure you have gulp installed globally (`npm install -g gulp`)
 
-Demo [Angular Video Clipper](http://www.angular-video-clipper.podserver.info/htdocs/index.html).
+Demo [Angular Video Clipper](http://angular-video-clipper.comxa.com/#/).
