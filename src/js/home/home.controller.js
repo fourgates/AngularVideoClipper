@@ -1,13 +1,20 @@
 class HomeCtrl {
-  constructor(AppConstants, $sce, $scope) {
+  constructor(AppConstants, VideoService) {
     'ngInject';
     var ctrl = this;
     ctrl.appName = AppConstants.appName;
-    var video = {
-    		source: 'http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4',
-    		clips: []			
+    var cachedVideos = VideoService.getVideos();
+    if(cachedVideos){
+    	ctrl.videos = cachedVideos;
     }
-    ctrl.videos = [];    
+    else{
+    	var video = {
+        		source: 'http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4',
+        		clips: []			
+        }
+        ctrl.videos = [];
+    }
+        
     ctrl.selectedVideos = [];
     ctrl.removeSelectedVideo = function(video){
     	if(video){
