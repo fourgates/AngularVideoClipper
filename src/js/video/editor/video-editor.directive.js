@@ -18,7 +18,7 @@ function VideoEditor($sce, $timeout){
 				if(!$scope.clips || $scope.clips.length == 0){
 					var video = {
 			    		src: $scope.source,
-			    		title: 'Original'
+			    		title: 'Full Video'
 				    }
 				    $scope.clips.push(video);
 					$scope.selectedVideo = video;
@@ -39,27 +39,10 @@ function VideoEditor($sce, $timeout){
 				}
 				return true;
 			}
-			// function called when a user manually add a clip
-		    ctrl.addClip = function(src, start, end, title){
-		    	var video = {
-			    		src: $scope.source + '#t='+start+',' + end,
-			    		title: title,
-			    		start: start,
-			    		end: end,
-			    }
-		    	if(validClip(video)){
-		    		$scope.clips.push(video);
-		    		$scope.start = null;
-					$scope.end = null;
-					$scope.title = null;
-		    	}
-		    }
-		    
 		    // function used to be able to stream via a url
 		    ctrl.trustSrc = function(src) {
 		        return $sce.trustAsResourceUrl(src);
 		    }
-		    
 		    // function called when a user wants to play a clip
 		    ctrl.playVideo = function(clip, index){
 		    	if(validClip(clip, index)){
@@ -78,15 +61,13 @@ function VideoEditor($sce, $timeout){
 		    	}
 		    }
 		    
+		    // function called when user clicks the pause buttons
 		    ctrl.pauseVideo = function(video){
 		    	$scope.pauseVideo(video);
 		    };
 		    ctrl.init();
 		},
 		link: function(scope, element, attrs, ctrl, transclude){
-			// update player if a clips is added / deleted 
-			// or the source changes
-			
 			function updatePlayer(start, end){
 				var el = $(element);
 				scope.player = el.find("video")[0];
@@ -100,9 +81,20 @@ function VideoEditor($sce, $timeout){
 						scope.player.currentTime = 0;
 					}
 					scope.player.play();
+					scope.player.addEventListener("timeupdate",autoPauseVideo);
 				}
 			}
 			
+			// function fires when the current video has reached its end
+			function autoPauseVideo(event) {
+				if(scope.selectedVideo.end){
+					if(this.currentTime > scope.selectedVideo.end){
+						pauseVideo();
+					}
+				}
+			}
+			
+			// function fires when a use clicks pause
 			function pauseVideo(video){
 				var el = $(element);
 				scope.player = el.find("video")[0];

@@ -4,7 +4,7 @@
 		<h4>{{ video.title }} - {{ selectedVideo.title }}</h4>
 	</div>
 	<!-- VIDEO -->
-	<video ng-if="selectedVideo" width="100%" height="240px" controls class="video-active">
+	<video ng-if="selectedVideo" width="100%" height="240px" class="video-active">
 	  <source ng-src="{{ $ctrl.trustSrc(selectedVideo.src) }}" type="video/mp4">
 	</video>
 	<!-- MANAGE CLIPS -->
