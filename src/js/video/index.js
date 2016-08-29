@@ -7,7 +7,7 @@ import videoEditorSources from "./sources/video-editor-sources.component";
 module.component('videoEditorSources', videoEditorSources);
 
 // directives
-import videoEditor from "./video-editor.directive";
+import videoEditor from "./editor/video-editor.directive";
 module.directive('videoEditor', videoEditor);
 
 import videoEditorClips from "./clips/video-editor-clips.directive";
