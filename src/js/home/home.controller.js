@@ -12,7 +12,7 @@ class HomeCtrl {
         		source: 'http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4',
         		clips: []			
         }
-        ctrl.videos = [];
+        ctrl.videos = [video];
     }
         
     ctrl.selectedVideos = [];
